@@ -13,17 +13,17 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<Variant, string> = {
-  primary: 'gradient-purple text-white shadow-lg shadow-purple-900/30 hover:opacity-90',
-  secondary: 'bg-white/10 text-white border border-white/10 hover:bg-white/15',
-  danger: 'bg-red-500/20 text-red-400 border border-red-500/20 hover:bg-red-500/30',
-  ghost: 'text-gray-400 hover:text-white hover:bg-white/5',
-  success: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/30',
+  primary:   'bg-gradient-to-r from-amber-600 to-amber-500 text-white shadow-lg shadow-amber-900/30 hover:from-amber-500 hover:to-amber-400',
+  secondary: 'bg-white/6 text-slate-200 border border-white/10 hover:bg-white/10 hover:border-white/20',
+  danger:    'bg-red-500/15 text-red-400 border border-red-500/25 hover:bg-red-500/25',
+  ghost:     'text-slate-400 hover:text-white hover:bg-white/6',
+  success:   'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 hover:bg-emerald-500/25',
 };
 
 const sizeStyles: Record<Size, string> = {
-  sm: 'px-3 py-1.5 text-sm rounded-xl',
-  md: 'px-5 py-2.5 text-sm rounded-xl',
-  lg: 'px-6 py-3.5 text-base rounded-2xl',
+  sm: 'px-3 py-1.5 text-xs rounded-lg',
+  md: 'px-4 py-2.5 text-sm rounded-xl',
+  lg: 'px-6 py-3 text-sm font-semibold rounded-xl',
 };
 
 export function Button({
@@ -42,7 +42,9 @@ export function Button({
       {...(props as React.ComponentProps<typeof motion.button>)}
       disabled={disabled || loading}
       className={cn(
-        'inline-flex items-center gap-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed',
+        'inline-flex items-center gap-2 font-medium transition-all duration-200',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50',
+        'disabled:opacity-40 disabled:cursor-not-allowed',
         variantStyles[variant],
         sizeStyles[size],
         className

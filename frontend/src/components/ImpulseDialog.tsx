@@ -63,9 +63,9 @@ export function ImpulseDialog({
             className="relative w-full max-w-md z-10"
           >
             {/* Dramatic glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/30 via-red-500/30 to-orange-500/30 rounded-3xl blur-xl" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 rounded-3xl blur-xl" />
 
-            <div className="relative glass-card p-6 border border-orange-500/20">
+            <div className="relative glass-card p-6 border border-amber-500/20">
               {/* Icon */}
               <motion.div
                 animate={{ rotate: [-5, 5, -5, 5, 0], scale: [1, 1.1, 1] }}

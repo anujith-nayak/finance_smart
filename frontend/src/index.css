@@ -1,62 +1,97 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
-  :root {
-    --radius: 0.75rem;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   body {
-    @apply bg-gray-950 text-gray-100 antialiased;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: #0a0f1e;
+    color: #e2e8f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+  /* Subtle radial glow in the background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    height: 60vh;
+    background: radial-gradient(ellipse at center,
+      rgba(16, 185, 129, 0.06) 0%,
+      rgba(245, 158, 11, 0.04) 40%,
+      transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
+
+  #root { position: relative; z-index: 1; }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-700 rounded-full;
+    background: rgba(245, 158, 11, 0.25);
+    border-radius: 99px;
   }
 }
 
 @layer utilities {
+
+  /* ── Glass cards ────────────────────────────────── */
   .glass {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(10, 15, 30, 0.75);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(10, 15, 30, 0.95));
     backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
   }
 
+  /* Gold top-edge shimmer on cards */
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.5), transparent);
+    pointer-events: none;
+  }
+
+  /* ── Gradients ──────────────────────────────────── */
   .gradient-text {
-    background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+    background: linear-gradient(135deg, #f59e0b, #10b981);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .gradient-purple {
-    background: linear-gradient(135deg, #7c3aed, #a855f7);
+  /* Primary CTA — gold */
+  .gradient-primary {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
   }
 
-  .gradient-blue {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
+  /* Legacy alias kept for existing components */
+  .gradient-purple {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
   }
 
   .gradient-green {
     background: linear-gradient(135deg, #059669, #10b981);
+  }
+
+  .gradient-blue {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
   }
 
   .gradient-orange {
@@ -67,19 +102,46 @@
     background: linear-gradient(135deg, #dc2626, #ef4444);
   }
 
-  .glow-purple {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  /* ── Glows ──────────────────────────────────────── */
+  .glow-gold {
+    box-shadow: 0 0 24px rgba(245, 158, 11, 0.25), 0 4px 16px rgba(0,0,0,0.4);
   }
 
-  .glow-blue {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+  /* Legacy aliases */
+  .glow-purple { box-shadow: 0 0 24px rgba(245, 158, 11, 0.25), 0 4px 16px rgba(0,0,0,0.4); }
+  .glow-blue   { box-shadow: 0 0 24px rgba(59, 130, 246, 0.2); }
+  .glow-green  { box-shadow: 0 0 24px rgba(16, 185, 129, 0.2); }
+
+  /* ── Card hover ─────────────────────────────────── */
+  .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(245, 158, 11, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 158, 11, 0.08);
   }
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  /* ── Stat accent bar (left border) ─────────────── */
+  .stat-gold  { border-left: 3px solid #f59e0b; }
+  .stat-green { border-left: 3px solid #10b981; }
+  .stat-red   { border-left: 3px solid #ef4444; }
+  .stat-blue  { border-left: 3px solid #3b82f6; }
+
+  /* ── Ticker / number style ──────────────────────── */
+  .ticker {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
   }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+
+  /* ── Pill badges ────────────────────────────────── */
+  .badge-gold   { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+  .badge-green  { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.25); }
+  .badge-red    { background: rgba(239,68,68,0.15);  color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+  .badge-blue   { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.25); }
+  .badge-gray   { background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); }
+
+  /* ── Scrollbar hide ─────────────────────────────── */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }

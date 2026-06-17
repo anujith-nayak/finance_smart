@@ -105,7 +105,7 @@ export function DashboardPage() {
             value={formatCurrency(totalSpent)}
             sub={`of ${formatCurrency(totalBudget)} budget`}
             icon={<TrendingDown size={20} />}
-            iconBg="bg-red-500/20"
+            iconBg="bg-red-500/15"
             iconColor="text-red-400"
           />
           <StatCard
@@ -113,7 +113,7 @@ export function DashboardPage() {
             value={formatCurrency(remaining)}
             sub={`${100 - budgetPct}% left`}
             icon={<PiggyBank size={20} />}
-            iconBg="bg-emerald-500/20"
+            iconBg="bg-emerald-500/15"
             iconColor="text-emerald-400"
           />
           <StatCard
@@ -121,15 +121,15 @@ export function DashboardPage() {
             value={formatCurrency(totalSaved)}
             sub={`${goals.length} active goals`}
             icon={<Target size={20} />}
-            iconBg="bg-purple-500/20"
-            iconColor="text-purple-400"
+            iconBg="bg-amber-500/15"
+            iconColor="text-amber-400"
           />
           <StatCard
             label="Impulse Buys"
             value={String(impulseCount)}
             sub="this month"
             icon={<Zap size={20} />}
-            iconBg="bg-orange-500/20"
+            iconBg="bg-orange-500/15"
             iconColor="text-orange-400"
           />
         </motion.div>
@@ -186,22 +186,16 @@ export function DashboardPage() {
                   <AreaChart data={chartData} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
                     <defs>
                       <linearGradient id="spendGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#a855f7" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.35} />
+                        <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="day" tick={{ fill: '#6b7280', fontSize: 11 }} axisLine={false} tickLine={false} />
                     <Tooltip
-                      contentStyle={{ background: '#1f2937', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#fff', fontSize: 12 }}
+                      contentStyle={{ background: '#0f172a', border: '1px solid rgba(245,158,11,0.15)', borderRadius: '12px', color: '#fff', fontSize: 12 }}
                       formatter={(v: unknown) => [formatCurrency(Number(v)), 'Spent']}
                     />
-                    <Area
-                      type="monotone"
-                      dataKey="amount"
-                      stroke="#a855f7"
-                      strokeWidth={2}
-                      fill="url(#spendGrad)"
-                    />
+                    <Area type="monotone" dataKey="amount" stroke="#f59e0b" strokeWidth={2} fill="url(#spendGrad)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -337,7 +331,7 @@ export function DashboardPage() {
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={() => setShowAddExpense(true)}
-        className="fixed bottom-20 right-4 lg:hidden w-14 h-14 gradient-purple rounded-2xl flex items-center justify-center shadow-lg shadow-purple-900/40 glow-purple z-30"
+        className="fixed bottom-20 right-4 lg:hidden w-14 h-14 bg-gradient-to-br from-amber-600 to-amber-400 rounded-2xl flex items-center justify-center shadow-xl shadow-amber-900/40 glow-gold z-30"
       >
         <Plus size={26} className="text-white" />
       </motion.button>
@@ -353,12 +347,12 @@ function StatCard({
 }) {
   return (
     <Card>
-      <div className={`w-10 h-10 ${iconBg} rounded-xl flex items-center justify-center mb-3`}>
+      <div className={`w-9 h-9 ${iconBg} rounded-xl flex items-center justify-center mb-3`}>
         <span className={iconColor}>{icon}</span>
       </div>
-      <p className="text-xl font-bold text-white leading-tight">{value}</p>
-      <p className="text-xs text-gray-400 mt-0.5 font-medium">{label}</p>
-      <p className="text-xs text-gray-500 mt-0.5">{sub}</p>
+      <p className="text-xl font-bold text-white ticker leading-tight">{value}</p>
+      <p className="text-xs font-semibold text-slate-400 mt-0.5 uppercase tracking-wide">{label}</p>
+      <p className="text-xs text-slate-600 mt-0.5">{sub}</p>
     </Card>
   );
 }

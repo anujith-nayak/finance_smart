@@ -12,26 +12,26 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-sm font-medium text-gray-300">{label}</label>
+          <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{label}</label>
         )}
         <select
           ref={ref}
           className={cn(
-            'w-full bg-gray-900 border border-white/10 rounded-xl px-4 py-3 text-white',
-            'focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50',
+            'w-full bg-slate-900/80 border border-white/10 rounded-xl px-4 py-3 text-white text-sm',
+            'focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500/40',
             'transition-all duration-200 cursor-pointer',
-            error && 'border-red-500/50',
+            error && 'border-red-500/40',
             className
           )}
           {...props}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-gray-900">
+            <option key={opt.value} value={opt.value} className="bg-slate-900">
               {opt.label}
             </option>
           ))}
         </select>
-        {error && <p className="text-red-400 text-xs mt-0.5">{error}</p>}
+        {error && <p className="text-red-400 text-xs">{error}</p>}
       </div>
     );
   }

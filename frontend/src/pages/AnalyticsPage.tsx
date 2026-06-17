@@ -68,11 +68,11 @@ export function AnalyticsPage() {
   // Need vs Want pie
   const needWantData = [
     { name: 'Needs', value: needsTotal, color: '#10b981' },
-    { name: 'Wants', value: wantsTotal, color: '#a855f7' },
+    { name: 'Wants', value: wantsTotal, color: '#f59e0b' },
   ].filter((d) => d.value > 0);
 
   const tooltipStyle = {
-    contentStyle: { background: '#1f2937', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#fff', fontSize: 12 },
+    contentStyle: { background: '#0f172a', border: '1px solid rgba(245,158,11,0.15)', borderRadius: '12px', color: '#fff', fontSize: 12 },
   };
 
   return (
@@ -115,7 +115,7 @@ export function AnalyticsPage() {
               <XAxis dataKey="day" tick={{ fill: '#6b7280', fontSize: 10 }} axisLine={false} tickLine={false} interval={4} />
               <YAxis tick={{ fill: '#6b7280', fontSize: 10 }} axisLine={false} tickLine={false} />
               <RTooltip {...tooltipStyle} formatter={(v: unknown) => [formatCurrency(Number(v)), 'Spent']} />
-              <Bar dataKey="amount" fill="#7c3aed" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="amount" fill="#f59e0b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
