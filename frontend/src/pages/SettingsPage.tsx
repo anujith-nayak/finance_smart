@@ -76,6 +76,7 @@ export function SettingsPage() {
           <SettingRow label="Version" value="1.0.0" />
           <SettingRow label="Made with" value="❤️ + TypeScript" />
           <SettingRow label="Stack" value="React + FastAPI + Supabase" />
+          <SettingRow label="made-by" value="Anujith_Nayak" />
         </div>
       </Card>
 
