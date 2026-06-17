@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const PROD_API_URL = 'https://finance-smart-0k7k.onrender.com/api';
+const BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? PROD_API_URL : '/api');
 
 export const api = axios.create({
   baseURL: BASE_URL,
