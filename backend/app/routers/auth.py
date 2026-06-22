@@ -48,7 +48,7 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
     db.refresh(user)
 
     token = create_access_token(
-        {"sub": user.id},
+        {"sub": str(user.id)},
         timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
     )
     return Token(access_token=token)
@@ -67,7 +67,7 @@ def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
     token = create_access_token(
-        {"sub": user.id},
+        {"sub": str(user.id)},
         timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
     )
     return Token(access_token=token)

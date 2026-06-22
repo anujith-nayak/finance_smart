@@ -13,13 +13,13 @@ import { NotificationsPage } from './pages/NotificationsPage';
 import { SettingsPage } from './pages/SettingsPage';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated } = useAuthStore();
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+  const { isAuthenticated, token } = useAuthStore();
+  return isAuthenticated && token ? <>{children}</> : <Navigate to="/login" replace />;
 }
 
 function PublicRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated } = useAuthStore();
-  return !isAuthenticated ? <>{children}</> : <Navigate to="/dashboard" replace />;
+  const { isAuthenticated, token } = useAuthStore();
+  return !(isAuthenticated && token) ? <>{children}</> : <Navigate to="/dashboard" replace />;
 }
 
 export default function App() {
